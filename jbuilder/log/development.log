@@ -1,0 +1,713 @@
+  [1m[35mSQL (0.8ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (9.8ms)[0m  [1m[35mDROP TABLE IF EXISTS "gifts" CASCADE[0m
+  [1m[35m (54.9ms)[0m  [1m[35mCREATE TABLE "gifts" ("id" bigserial primary key, "title" character varying NOT NULL, "description" character varying NOT NULL, "guest_id" integer NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX  "index_gifts_on_guest_id" ON "gifts"  ("guest_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "guests" CASCADE[0m
+  [1m[35m (5.9ms)[0m  [1m[35mCREATE TABLE "guests" ("id" bigserial primary key, "name" character varying NOT NULL, "age" integer NOT NULL, "favorite_color" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "invitations" CASCADE[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "invitations" ("id" bigserial primary key, "guest_id" integer, "party_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE  INDEX  "index_invitations_on_guest_id" ON "invitations"  ("guest_id")[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX  "index_invitations_on_party_id" ON "invitations"  ("party_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "parties" CASCADE[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "parties" ("id" bigserial primary key, "name" character varying NOT NULL, "location" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (37.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170714204346)[0m
+  [1m[35m (0.7ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170714204119),
+(20170714204225),
+(20170714204315);
+
+[0m
+  [1m[35m (4.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-09-25 17:37:25.111884"], ["updated_at", "2019-09-25 17:37:25.111884"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "gifts" CASCADE[0m
+  [1m[35m (11.6ms)[0m  [1m[35mCREATE TABLE "gifts" ("id" bigserial primary key, "title" character varying NOT NULL, "description" character varying NOT NULL, "guest_id" integer NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (2.0ms)[0m  [1m[35mCREATE  INDEX  "index_gifts_on_guest_id" ON "gifts"  ("guest_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "guests" CASCADE[0m
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE TABLE "guests" ("id" bigserial primary key, "name" character varying NOT NULL, "age" integer NOT NULL, "favorite_color" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "invitations" CASCADE[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE TABLE "invitations" ("id" bigserial primary key, "guest_id" integer, "party_id" integer, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE  INDEX  "index_invitations_on_guest_id" ON "invitations"  ("guest_id")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX  "index_invitations_on_party_id" ON "invitations"  ("party_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "parties" CASCADE[0m
+  [1m[35m (7.0ms)[0m  [1m[35mCREATE TABLE "parties" ("id" bigserial primary key, "name" character varying NOT NULL, "location" character varying NOT NULL, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[35m (6.5ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20170714204346)[0m
+  [1m[35m (1.0ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20170714204119),
+(20170714204225),
+(20170714204315);
+
+[0m
+  [1m[35m (5.0ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp NOT NULL, "updated_at" timestamp NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.7ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-09-25 17:37:25.235183"], ["updated_at", "2019-09-25 17:37:25.235183"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE "ar_internal_metadata" SET "value" = $1, "updated_at" = $2 WHERE "ar_internal_metadata"."key" = $3[0m  [["value", "test"], ["updated_at", "2019-09-25 17:37:25.239879"], ["key", "environment"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "guests" ("name", "age", "favorite_color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "John Smith"], ["age", 45], ["favorite_color", "Blue"], ["created_at", "2019-09-25 17:37:25.339375"], ["updated_at", "2019-09-25 17:37:25.339375"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "guests" ("name", "age", "favorite_color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Jane Doe"], ["age", 47], ["favorite_color", "Green"], ["created_at", "2019-09-25 17:37:25.342530"], ["updated_at", "2019-09-25 17:37:25.342530"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "guests" ("name", "age", "favorite_color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Josh Brown"], ["age", 22], ["favorite_color", "Brown"], ["created_at", "2019-09-25 17:37:25.344783"], ["updated_at", "2019-09-25 17:37:25.344783"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "guests" ("name", "age", "favorite_color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Helen White"], ["age", 25], ["favorite_color", "White"], ["created_at", "2019-09-25 17:37:25.347080"], ["updated_at", "2019-09-25 17:37:25.347080"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "guests" ("name", "age", "favorite_color", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Job Bluth"], ["age", 41], ["favorite_color", "Red"], ["created_at", "2019-09-25 17:37:25.349195"], ["updated_at", "2019-09-25 17:37:25.349195"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "gifts" ("title", "description", "guest_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "A Bottle of Wine"], ["description", "This one is not so great."], ["guest_id", 1], ["created_at", "2019-09-25 17:37:25.373809"], ["updated_at", "2019-09-25 17:37:25.373809"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "gifts" ("title", "description", "guest_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Another Bottle of Wine"], ["description", "This one is not so bad."], ["guest_id", 1], ["created_at", "2019-09-25 17:37:25.376669"], ["updated_at", "2019-09-25 17:37:25.376669"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "gifts" ("title", "description", "guest_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "The Hunger Games"], ["description", "A bit dark for a gift, but it's good."], ["guest_id", 2], ["created_at", "2019-09-25 17:37:25.378898"], ["updated_at", "2019-09-25 17:37:25.378898"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "gifts" ("title", "description", "guest_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Baseball Glove"], ["description", "Feel like a kid again!"], ["guest_id", 3], ["created_at", "2019-09-25 17:37:25.380986"], ["updated_at", "2019-09-25 17:37:25.380986"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "gifts" ("title", "description", "guest_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Basketball Tickets"], ["description", "The team's going 82-0 this year."], ["guest_id", 3], ["created_at", "2019-09-25 17:37:25.383147"], ["updated_at", "2019-09-25 17:37:25.383147"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "gifts" ("title", "description", "guest_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["title", "Hawaiian Getaway"], ["description", "Helen has the best gifts."], ["guest_id", 4], ["created_at", "2019-09-25 17:37:25.385376"], ["updated_at", "2019-09-25 17:37:25.385376"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.8ms)[0m  [1m[32mINSERT INTO "parties" ("name", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Secret Santa Extravaganza"], ["location", "Portland"], ["created_at", "2019-09-25 17:37:25.401067"], ["updated_at", "2019-09-25 17:37:25.401067"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "parties" ("name", "location", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "Charles' Christmas Party"], ["location", "San Francisco"], ["created_at", "2019-09-25 17:37:25.404101"], ["updated_at", "2019-09-25 17:37:25.404101"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[32mINSERT INTO "invitations" ("guest_id", "party_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["guest_id", 1], ["party_id", 1], ["created_at", "2019-09-25 17:37:25.422632"], ["updated_at", "2019-09-25 17:37:25.422632"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "invitations" ("guest_id", "party_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["guest_id", 2], ["party_id", 1], ["created_at", "2019-09-25 17:37:25.425631"], ["updated_at", "2019-09-25 17:37:25.425631"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "invitations" ("guest_id", "party_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["guest_id", 3], ["party_id", 1], ["created_at", "2019-09-25 17:37:25.427891"], ["updated_at", "2019-09-25 17:37:25.427891"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "invitations" ("guest_id", "party_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["guest_id", 4], ["party_id", 1], ["created_at", "2019-09-25 17:37:25.430077"], ["updated_at", "2019-09-25 17:37:25.430077"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "invitations" ("guest_id", "party_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["guest_id", 5], ["party_id", 1], ["created_at", "2019-09-25 17:37:25.432247"], ["updated_at", "2019-09-25 17:37:25.432247"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "invitations" ("guest_id", "party_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["guest_id", 3], ["party_id", 2], ["created_at", "2019-09-25 17:37:25.434519"], ["updated_at", "2019-09-25 17:37:25.434519"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[32mINSERT INTO "invitations" ("guest_id", "party_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["guest_id", 4], ["party_id", 2], ["created_at", "2019-09-25 17:37:25.437034"], ["updated_at", "2019-09-25 17:37:25.437034"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/users/new" for ::1 at 2019-09-25 14:11:49 -0400
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (No route matches [GET] "/users/new"):
+  
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/guests" for ::1 at 2019-09-25 14:11:53 -0400
+Processing by Api::GuestsController#index as JSON
+  Rendering api/guests/index.json.jbuilder
+  [1m[36mGuest Load (0.9ms)[0m  [1m[34mSELECT "guests".* FROM "guests"[0m
+  Rendered api/guests/index.json.jbuilder (126.0ms)
+Completed 200 OK in 220ms (Views: 142.9ms | ActiveRecord: 26.7ms)
+
+
+Started GET "/api/guests" for ::1 at 2019-09-25 14:12:25 -0400
+Processing by Api::GuestsController#index as JSON
+  Rendering api/guests/index.json.jbuilder
+  [1m[36mGuest Load (1.4ms)[0m  [1m[34mSELECT "guests".* FROM "guests"[0m
+  Rendered api/guests/index.json.jbuilder (4.1ms)
+Completed 200 OK in 41ms (Views: 39.3ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/api/guests" for ::1 at 2019-09-25 14:13:01 -0400
+Processing by Api::GuestsController#index as JSON
+  Rendering api/guests/index.json.jbuilder
+  Rendered api/guests/index.json.jbuilder (0.4ms)
+Completed 200 OK in 6ms (Views: 6.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/api/guests" for ::1 at 2019-09-25 14:14:09 -0400
+Processing by Api::GuestsController#index as JSON
+  Rendering api/guests/index.json.jbuilder
+  [1m[36mGuest Load (0.9ms)[0m  [1m[34mSELECT "guests".* FROM "guests"[0m
+  Rendered api/guests/index.json.jbuilder (5.5ms)
+Completed 200 OK in 15ms (Views: 14.1ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/api/guests" for ::1 at 2019-09-25 14:14:37 -0400
+Processing by Api::GuestsController#index as JSON
+  Rendering api/guests/index.json.jbuilder
+  [1m[36mGuest Load (0.5ms)[0m  [1m[34mSELECT "guests".* FROM "guests"[0m
+  Rendered api/guests/index.json.jbuilder (20.5ms)
+Completed 200 OK in 27ms (Views: 26.3ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/api/guests" for ::1 at 2019-09-25 14:16:25 -0400
+Processing by Api::GuestsController#index as JSON
+  Rendering api/guests/index.json.jbuilder
+  [1m[36mGuest Load (1.5ms)[0m  [1m[34mSELECT "guests".* FROM "guests"[0m
+  Rendered api/guests/index.json.jbuilder (4.8ms)
+Completed 200 OK in 15ms (Views: 13.2ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/api/guests" for ::1 at 2019-09-25 14:25:02 -0400
+Processing by Api::GuestsController#index as JSON
+  Rendering api/guests/index.json.jbuilder
+  [1m[36mGuest Load (0.5ms)[0m  [1m[34mSELECT "guests".* FROM "guests"[0m
+  Rendered api/guests/index.json.jbuilder (3.6ms)
+Completed 200 OK in 26ms (Views: 24.6ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/api/gifts" for ::1 at 2019-09-25 14:25:07 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/api/gifts"):
+  
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/gift" for ::1 at 2019-09-25 14:25:11 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/api/gift"):
+  
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/gift" for ::1 at 2019-09-25 14:30:14 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/api/gift"):
+  
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/gifts" for ::1 at 2019-09-25 14:30:17 -0400
+Processing by Api::GiftsController#index as JSON
+  Rendering api/gifts/index.json.jbuilder
+  [1m[36mGift Load (1.4ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."guest_id" IS NULL[0m
+  Rendered api/gifts/index.json.jbuilder (10.0ms)
+Completed 200 OK in 55ms (Views: 26.0ms | ActiveRecord: 6.8ms)
+
+
+Started GET "/api/gifts" for ::1 at 2019-09-25 14:32:56 -0400
+Processing by Api::GiftsController#index as JSON
+  Rendering api/gifts/index.json.jbuilder
+  [1m[36mGift Load (1.7ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."guest_id" IS NULL[0m
+  Rendered api/gifts/index.json.jbuilder (3.7ms)
+Completed 200 OK in 12ms (Views: 10.3ms | ActiveRecord: 1.7ms)
+
+
+Started GET "/api/gifts" for ::1 at 2019-09-25 14:32:58 -0400
+Processing by Api::GiftsController#index as JSON
+  Rendering api/gifts/index.json.jbuilder
+  [1m[36mGift Load (0.6ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."guest_id" IS NULL[0m
+  Rendered api/gifts/index.json.jbuilder (2.5ms)
+Completed 200 OK in 12ms (Views: 10.7ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/api/gifts" for ::1 at 2019-09-25 14:42:57 -0400
+Processing by Api::GiftsController#index as JSON
+  Rendering api/gifts/index.json.jbuilder
+  [1m[36mGift Load (1.0ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."guest_id" IS NULL[0m
+  Rendered api/gifts/index.json.jbuilder (5.4ms)
+Completed 200 OK in 22ms (Views: 20.7ms | ActiveRecord: 1.0ms)
+
+
+Started GET "/api/gift/1" for ::1 at 2019-09-25 14:43:11 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/api/gift/1"):
+  
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/gift/1" for ::1 at 2019-09-25 14:44:00 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/api/gift/1"):
+  
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 14:45:06 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (0.8ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 14:49:40 -0400
+Started GET "/api/gift/1" for ::1 at 2019-09-25 14:49:40 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 14:51:12 -0400
+  
+Processing by Api::GiftsController#show as JSON
+Started GET "/api/gift/1" for ::1 at 2019-09-25 14:51:12 -0400
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (12.3ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  
+ActionController::RoutingError (No route matches [GET] "/api/gift/1"):
+  
+ActionController::RoutingError (No route matches [GET] "/api/gift/1"):
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  
+  Rendering api/gifts/show.json.jbuilder
+actionpack (5.1.7) lib/action_dispatch/middleware/debug_exceptions.rb:63:in `call'
+web-console (3.7.0) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.7.0) lib/web_console/middleware.rb:30:in `block in call'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `catch'
+web-console (3.7.0) lib/web_console/middleware.rb:20:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.1.7) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.1.7) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.1.7) lib/rails/rack/logger.rb:24:in `call'
+sprockets-rails (3.2.1) lib/sprockets/rails/quiet_assets.rb:13:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/request_id.rb:25:in `call'
+rack (2.0.7) lib/rack/method_override.rb:22:in `call'
+rack (2.0.7) lib/rack/runtime.rb:22:in `call'
+activesupport (5.1.7) lib/active_support/cache/strategy/local_cache_middleware.rb:27:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.1.7) lib/action_dispatch/middleware/static.rb:125:in `call'
+rack (2.0.7) lib/rack/sendfile.rb:111:in `call'
+railties (5.1.7) lib/rails/engine.rb:522:in `call'
+puma (3.12.1) lib/puma/configuration.rb:227:in `call'
+puma (3.12.1) lib/puma/server.rb:660:in `handle_request'
+puma (3.12.1) lib/puma/server.rb:474:in `process_client'
+puma (3.12.1) lib/puma/server.rb:334:in `block in run'
+puma (3.12.1) lib/puma/thread_pool.rb:135:in `block in spawn_thread'
+  Rendered api/gifts/show.json.jbuilder (121.3ms)
+Completed 500 Internal Server Error in 489ms (ActiveRecord: 14.8ms)
+
+
+
+NoMethodError - undefined method `gifts' for nil:NilClass:
+  app/views/api/gifts/show.json.jbuilder:4:in `block in _app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143707327240'
+  app/views/api/gifts/show.json.jbuilder:2:in `_app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143707327240'
+  app/controllers/api/gifts_controller.rb:9:in `show'
+
+  [1m[36mGift Load (3.3ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  Rendered api/gifts/show.json.jbuilder (119.7ms)
+Completed 500 Internal Server Error in 929ms (ActiveRecord: 521.7ms)
+
+
+
+NoMethodError - undefined method `gifts' for nil:NilClass:
+  app/views/api/gifts/show.json.jbuilder:4:in `block in _app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143707327240'
+  app/views/api/gifts/show.json.jbuilder:2:in `_app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143707327240'
+  app/controllers/api/gifts_controller.rb:9:in `show'
+
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 14:51:15 -0400
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 14:51:15 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (13.4ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  [1m[36mGift Load (22.6ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  Rendered api/gifts/show.json.jbuilder (180.2ms)
+  [1m[36mGuest Load (100.7ms)[0m  [1m[34mSELECT  "guests".* FROM "guests" WHERE "guests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Completed 500 Internal Server Error in 264ms (ActiveRecord: 13.4ms)
+
+
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 14:54:18 -0400
+
+NoMethodError - undefined method `gifts' for nil:NilClass:
+  app/views/api/gifts/show.json.jbuilder:4:in `block in _app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143672305160'
+  app/views/api/gifts/show.json.jbuilder:2:in `_app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143672305160'
+  app/controllers/api/gifts_controller.rb:9:in `show'
+
+  Rendered api/gifts/show.json.jbuilder (182523.1ms)
+Processing by Api::GiftsController#show as JSON
+  Rendered api/gifts/show.json.jbuilder (551266.4ms)
+Completed 500 Internal Server Error in 551344ms (ActiveRecord: 170.9ms)
+
+
+
+NoMethodError - undefined method `gifts' for nil:NilClass:
+  app/views/api/gifts/show.json.jbuilder:4:in `block in _app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143682901100'
+  app/views/api/gifts/show.json.jbuilder:2:in `_app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143682901100'
+  app/controllers/api/gifts_controller.rb:9:in `show'
+
+  Parameters: {"id"=>"1"}
+Completed 500 Internal Server Error in 182802ms (ActiveRecord: 22.6ms)
+
+
+
+NoMethodError - undefined method `gifts' for nil:NilClass:
+  app/views/api/gifts/show.json.jbuilder:4:in `block in _app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143672305160'
+  app/views/api/gifts/show.json.jbuilder:2:in `_app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143672305160'
+  app/controllers/api/gifts_controller.rb:9:in `show'
+
+  [1m[36mGift Load (1.1ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  Rendered api/gifts/show.json.jbuilder (757.3ms)
+Completed 500 Internal Server Error in 872ms (ActiveRecord: 39.9ms)
+
+
+
+NoMethodError - undefined method `gifts' for nil:NilClass:
+  app/views/api/gifts/show.json.jbuilder:4:in `block in _app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143682884740'
+  app/views/api/gifts/show.json.jbuilder:2:in `_app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143682884740'
+  app/controllers/api/gifts_controller.rb:9:in `show'
+
+Started POST "/__better_errors/d7749556cd87519e/variables" for ::1 at 2019-09-25 14:54:21 -0400
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 14:54:23 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (1.8ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  Rendered api/gifts/show.json.jbuilder (97.0ms)
+Completed 500 Internal Server Error in 113ms (ActiveRecord: 1.8ms)
+
+
+
+NoMethodError - undefined method `gifts' for nil:NilClass:
+  app/views/api/gifts/show.json.jbuilder:4:in `block in _app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143708388600'
+  app/views/api/gifts/show.json.jbuilder:2:in `_app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143708388600'
+  app/controllers/api/gifts_controller.rb:9:in `show'
+
+Started POST "/__better_errors/f926ab20406fe276/variables" for ::1 at 2019-09-25 14:54:23 -0400
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 14:54:46 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (0.8ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  Rendered api/gifts/show.json.jbuilder (44.2ms)
+Completed 200 OK in 57ms (Views: 54.7ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 14:54:55 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (0.8ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  [1m[36mGuest Load (2.2ms)[0m  [1m[34mSELECT  "guests".* FROM "guests" WHERE "guests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGift Load (0.8ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."guest_id" = $1 LIMIT $2[0m  [["guest_id", 1], ["LIMIT", 11]]
+  Rendered api/gifts/show.json.jbuilder (80005.8ms)
+Completed 200 OK in 80074ms (Views: 80069.6ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 14:56:19 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (0.8ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  [1m[36mGuest Load (1.3ms)[0m  [1m[34mSELECT  "guests".* FROM "guests" WHERE "guests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGift Load (0.9ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."guest_id" = $1[0m  [["guest_id", 1]]
+  Rendered api/gifts/show.json.jbuilder (10.1ms)
+Completed 200 OK in 61ms (Views: 55.1ms | ActiveRecord: 3.5ms)
+
+
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 14:59:24 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (0.7ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  [1m[36mGuest Load (1.5ms)[0m  [1m[34mSELECT  "guests".* FROM "guests" WHERE "guests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGift Load (1.2ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."guest_id" = $1[0m  [["guest_id", 1]]
+  Rendered api/gifts/show.json.jbuilder (8.3ms)
+Completed 200 OK in 18ms (Views: 13.3ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 15:00:13 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (0.8ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  [1m[36mGuest Load (0.7ms)[0m  [1m[34mSELECT  "guests".* FROM "guests" WHERE "guests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGift Load (0.4ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."guest_id" = $1[0m  [["guest_id", 1]]
+  Rendered api/gifts/show.json.jbuilder (6.3ms)
+Completed 200 OK in 22ms (Views: 17.7ms | ActiveRecord: 1.9ms)
+
+
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 15:00:24 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (0.7ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  [1m[36mGuest Load (0.6ms)[0m  [1m[34mSELECT  "guests".* FROM "guests" WHERE "guests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGift Load (0.4ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."guest_id" = $1[0m  [["guest_id", 1]]
+  Rendered api/gifts/show.json.jbuilder (5.0ms)
+Completed 200 OK in 16ms (Views: 11.9ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 15:00:30 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (1.1ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  [1m[36mGuest Load (0.5ms)[0m  [1m[34mSELECT  "guests".* FROM "guests" WHERE "guests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mGift Load (0.4ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."guest_id" = $1[0m  [["guest_id", 1]]
+  Rendered api/gifts/show.json.jbuilder (5.5ms)
+Completed 200 OK in 18ms (Views: 14.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/api/guests/1" for ::1 at 2019-09-25 15:01:59 -0400
+Processing by Api::GuestsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGuest Load (0.8ms)[0m  [1m[34mSELECT  "guests".* FROM "guests" WHERE "guests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/guests/show.json.jbuilder
+  Rendered api/guests/show.json.jbuilder (0.8ms)
+Completed 200 OK in 51ms (Views: 43.6ms | ActiveRecord: 1.6ms)
+
+
+Started GET "/api/guests/1" for ::1 at 2019-09-25 15:02:55 -0400
+Processing by Api::GuestsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGuest Load (0.9ms)[0m  [1m[34mSELECT  "guests".* FROM "guests" WHERE "guests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/guests/show.json.jbuilder
+  [1m[36mGift Load (0.5ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."guest_id" = $1[0m  [["guest_id", 1]]
+  Rendered api/guests/show.json.jbuilder (41.0ms)
+Completed 200 OK in 53ms (Views: 50.0ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/api/guests/1" for ::1 at 2019-09-25 15:03:24 -0400
+Processing by Api::GuestsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGuest Load (0.4ms)[0m  [1m[34mSELECT  "guests".* FROM "guests" WHERE "guests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/guests/show.json.jbuilder
+  [1m[36mGift Load (0.5ms)[0m  [1m[34mSELECT "gifts".* FROM "gifts" WHERE "gifts"."guest_id" = $1[0m  [["guest_id", 1]]
+  Rendered api/guests/show.json.jbuilder (3.9ms)
+Completed 200 OK in 14ms (Views: 11.6ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 15:04:31 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (1.2ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  Rendered api/gifts/show.json.jbuilder (5.9ms)
+Completed 500 Internal Server Error in 20ms (ActiveRecord: 1.2ms)
+
+
+
+NoMethodError - undefined method `each' for nil:NilClass:
+  app/views/api/gifts/show.json.jbuilder:4:in `block in _app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143707914740'
+  app/views/api/gifts/show.json.jbuilder:2:in `_app_views_api_gifts_show_json_jbuilder___1788641039491183858_70143707914740'
+  app/controllers/api/gifts_controller.rb:9:in `show'
+
+Started POST "/__better_errors/f78de3495943aa07/variables" for ::1 at 2019-09-25 15:04:31 -0400
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 15:06:06 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (0.4ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  Rendered api/gifts/show.json.jbuilder (1.1ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.4ms)
+
+
+
+SyntaxError - syntax error, unexpected tIVAR, expecting &. or :: or '[' or '.'
+json.title, json.extract! @gift, :title, :description
+                          ^~~~~
+/Users/aa/Desktop/W7D3/jbuilder/app/views/api/gifts/show.json.jbuilder:2: syntax error, unexpected ',', expecting &. or :: or '[' or '.'
+...e, json.extract! @gift, :title, :description
+...                              ^:
+  app/views/api/gifts/show.json.jbuilder:2:in `'
+  app/controllers/api/gifts_controller.rb:9:in `show'
+
+Started POST "/__better_errors/66dd51e90862a0f7/variables" for ::1 at 2019-09-25 15:06:06 -0400
+Started GET "/api/gifts/1" for ::1 at 2019-09-25 15:06:19 -0400
+Processing by Api::GiftsController#show as JSON
+  Parameters: {"id"=>"1"}
+  [1m[36mGift Load (0.6ms)[0m  [1m[34mSELECT  "gifts".* FROM "gifts" WHERE "gifts"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  Rendering api/gifts/show.json.jbuilder
+  Rendered api/gifts/show.json.jbuilder (0.8ms)
+Completed 200 OK in 14ms (Views: 11.2ms | ActiveRecord: 0.6ms)
+
+
